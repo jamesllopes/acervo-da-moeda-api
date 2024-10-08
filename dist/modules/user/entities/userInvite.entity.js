@@ -9,47 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.InvitedEmail = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-let User = class User extends sequelize_typescript_1.Model {
+let InvitedEmail = class InvitedEmail extends sequelize_typescript_1.Model {
 };
+exports.InvitedEmail = InvitedEmail;
 __decorate([
+    sequelize_typescript_1.PrimaryKey,
     (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.UUID,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
+    }),
+    __metadata("design:type", String)
+], InvitedEmail.prototype, "id", void 0);
+__decorate([
+    sequelize_typescript_1.IsEmail,
+    sequelize_typescript_1.Unique,
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        field: 'created_at',
-    }),
-    sequelize_typescript_1.CreatedAt,
-    __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        field: 'updated_at',
-    }),
-    sequelize_typescript_1.UpdatedAt,
-    __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
-User = __decorate([
+], InvitedEmail.prototype, "email", void 0);
+exports.InvitedEmail = InvitedEmail = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: 'users',
-        underscored: true,
-        paranoid: true,
+        tableName: 'InvitedUsers',
+        timestamps: true,
     })
-], User);
-exports.default = User;
-//# sourceMappingURL=user.entity.js.map
+], InvitedEmail);
+//# sourceMappingURL=userInvite.entity.js.map

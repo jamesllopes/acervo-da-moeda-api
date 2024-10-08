@@ -19,8 +19,8 @@ let AuthService = class AuthService {
         this.userService = userService;
         this.jwtService = jwtService;
     }
-    async validateUser(username, pass) {
-        const user = await this.userService.findByUsername(username);
+    async validateUser(email, pass) {
+        const user = await this.userService.findByEmail(email);
         if (user && (await bcrypt.compare(pass, user.password))) {
             const { password, ...result } = user;
             return result;
@@ -28,12 +28,16 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        const payload = { username: user.username, sub: user.id };
+        const payload = { email: user.email, sub: user.id };
         return {
             access_token: this.jwtService.sign(payload),
         };
     }
     async register(registerDto) {
+        const isInvited = await this.userService.isEmailInvited(registerDto.email);
+        if (!isInvited) {
+            throw new common_1.BadRequestException('Este email não foi convidado.');
+        }
         const hashedPassword = await bcrypt.hash(registerDto.password, 10);
         return this.userService.createUser({
             ...registerDto,

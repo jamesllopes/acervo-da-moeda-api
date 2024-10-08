@@ -1,47 +1,41 @@
 import {
-    Table,
-    Model,
-    Column,
-    DataType,
-    CreatedAt,
-    UpdatedAt,
-    DeletedAt,
-} from "sequelize-typescript";
-
+  Table,
+  Model,
+  Column,
+  CreatedAt,
+  UpdatedAt,
+} from 'sequelize-typescript';
 
 @Table({
-    tableName: "users",
-    underscored: true,
-    paranoid: true,
+  tableName: 'users',
+  underscored: true,
+  paranoid: true,
 })
 export default class User extends Model<User> {
-    @Column({
-        allowNull: false,
-    })
-    username: string;
+  @Column({
+    allowNull: false,
+  })
+  name: string;
 
-    @Column({
-        allowNull: false,
-    })
-    email: string;
+  @Column({
+    allowNull: false,
+  })
+  email: string;
 
-    @Column({
-        allowNull: false,
-    })
-    password: string;
+  @Column({
+    allowNull: false,
+  })
+  password: string;
 
+  @Column({
+    field: 'created_at',
+  })
+  @CreatedAt
+  createdAt: Date;
 
-    @Column({
-        field: "created_at",
-    })
-    @CreatedAt
-    createdAt: Date;
-
-    @Column({
-        field: "updated_at",
-    })
-    @UpdatedAt
-    updatedAt: Date;
-
-
+  @Column({
+    field: 'updated_at',
+  })
+  @UpdatedAt
+  updatedAt: Date;
 }

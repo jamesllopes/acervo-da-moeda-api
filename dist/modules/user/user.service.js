@@ -16,13 +16,21 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const user_entity_1 = require("./entities/user.entity");
+const userInvite_entity_1 = require("./entities/userInvite.entity");
 let UserService = class UserService {
-    constructor(userModel) {
+    constructor(userModel, userInvitedModel) {
         this.userModel = userModel;
+        this.userInvitedModel = userInvitedModel;
+    }
+    async isEmailInvited(email) {
+        const invitedEmail = await this.userInvitedModel.findOne({
+            where: { email },
+        });
+        return !!invitedEmail;
     }
     async createUser(createUserDto) {
         const user = new user_entity_1.default();
-        user.username = createUserDto.username;
+        user.name = createUserDto.name;
         user.password = createUserDto.password;
         user.email = createUserDto.email;
         return user.save();
@@ -30,17 +38,32 @@ let UserService = class UserService {
     async findAll() {
         return this.userModel.findAll();
     }
-    async findByUsername(username) {
-        return this.userModel.findOne({ where: { username } });
-    }
     async findByEmail(email) {
         return this.userModel.findOne({ where: { email } });
+    }
+    async inviteUser(email) {
+        const existingInvite = await this.userInvitedModel.findOne({
+            where: { email },
+        });
+        if (existingInvite) {
+            throw new common_1.BadRequestException('Este email já foi convidado.');
+        }
+        await this.userInvitedModel.create({ email });
+        return {
+            success: true,
+            message: 'Usuário convidado com sucesso!',
+            data: {
+                email,
+                invitedAt: new Date().toISOString(),
+            },
+        };
     }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, sequelize_1.InjectModel)(user_entity_1.default)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, sequelize_1.InjectModel)(userInvite_entity_1.InvitedEmail)),
+    __metadata("design:paramtypes", [Object, Object])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

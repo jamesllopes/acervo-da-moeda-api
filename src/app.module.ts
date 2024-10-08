@@ -6,4 +6,4 @@ import { AuthModule } from './modules/auth/auth.module';
 @Module({
   imports: [DatabaseModule, UserModule, AuthModule],
 })
-export class AppModule { }
+export class AppModule {}

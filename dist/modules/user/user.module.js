@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const user_service_1 = require("./user.service");
 const user_entity_1 = require("./entities/user.entity");
+const userInvite_entity_1 = require("./entities/userInvite.entity");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([user_entity_1.default])],
+        imports: [sequelize_1.SequelizeModule.forFeature([userInvite_entity_1.InvitedEmail, user_entity_1.default])],
         providers: [user_service_1.UserService],
         exports: [user_service_1.UserService],
     })
