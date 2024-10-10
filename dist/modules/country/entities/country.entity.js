@@ -9,32 +9,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvitedEmail = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-let InvitedEmail = class InvitedEmail extends sequelize_typescript_1.Model {
+let Country = class Country extends sequelize_typescript_1.Model {
 };
-exports.InvitedEmail = InvitedEmail;
 __decorate([
-    sequelize_typescript_1.PrimaryKey,
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.UUID,
-        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
-    }),
-    __metadata("design:type", String)
-], InvitedEmail.prototype, "id", void 0);
-__decorate([
-    sequelize_typescript_1.IsEmail,
-    sequelize_typescript_1.Unique,
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], InvitedEmail.prototype, "email", void 0);
-exports.InvitedEmail = InvitedEmail = __decorate([
+], Country.prototype, "name", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Country.prototype, "symbol", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Country.prototype, "locale", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'createdAt',
+    }),
+    sequelize_typescript_1.CreatedAt,
+    __metadata("design:type", Date)
+], Country.prototype, "createdAt", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'updatedAt',
+    }),
+    sequelize_typescript_1.UpdatedAt,
+    __metadata("design:type", Date)
+], Country.prototype, "updatedAt", void 0);
+Country = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: 'invitedUsers',
-        timestamps: true,
+        tableName: 'countries',
+        underscored: true,
     })
-], InvitedEmail);
-//# sourceMappingURL=userInvite.entity.js.map
+], Country);
+exports.default = Country;
+//# sourceMappingURL=country.entity.js.map

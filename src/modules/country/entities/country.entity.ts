@@ -1,17 +1,19 @@
+// src/models/Country.ts
 import {
   Table,
   Model,
   Column,
   CreatedAt,
   UpdatedAt,
+  AllowNull,
+  ForeignKey,
 } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'users',
+  tableName: 'countries',
   underscored: true,
-  paranoid: true,
 })
-export default class User extends Model<User> {
+export default class Country extends Model<Country> {
   @Column({
     allowNull: false,
   })
@@ -20,12 +22,12 @@ export default class User extends Model<User> {
   @Column({
     allowNull: false,
   })
-  email: string;
+  symbol: string;
 
   @Column({
     allowNull: false,
   })
-  password: string;
+  locale: string;
 
   @Column({
     field: 'createdAt',

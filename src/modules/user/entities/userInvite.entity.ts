@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'InvitedUsers', // Nome da tabela
+  tableName: 'invitedUsers', // Nome da tabela
   timestamps: true, // Para incluir automaticamente createdAt e updatedAt
 })
 export class InvitedEmail extends Model<InvitedEmail> {

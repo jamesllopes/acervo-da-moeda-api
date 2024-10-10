@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Countries', {
+    await queryInterface.createTable('countries', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -23,20 +23,6 @@ module.exports = {
         allowNull: false,
         unique: true, // Cada localidade deve ser única
       },
-      flag: {
-        type: Sequelize.STRING, // URL da bandeira do país
-        allowNull: true,
-      },
-      continentId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'Continents', // Nome da tabela de continentes
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -51,6 +37,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('Countries');
+    await queryInterface.dropTable('countries');
   },
 };

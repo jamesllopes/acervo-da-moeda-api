@@ -6,22 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModule = void 0;
+exports.CountryModule = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
-const user_service_1 = require("./user.service");
-const user_entity_1 = require("./entities/user.entity");
-const userInvite_entity_1 = require("./entities/userInvite.entity");
-const user_controller_1 = require("./user.controller");
-let UserModule = class UserModule {
+const country_service_1 = require("./country.service");
+const country_entity_1 = require("./entities/country.entity");
+const country_controller_1 = require("./country.controller");
+let CountryModule = class CountryModule {
 };
-exports.UserModule = UserModule;
-exports.UserModule = UserModule = __decorate([
+exports.CountryModule = CountryModule;
+exports.CountryModule = CountryModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([userInvite_entity_1.InvitedEmail, user_entity_1.default])],
-        providers: [user_service_1.UserService],
-        exports: [user_service_1.UserService],
-        controllers: [user_controller_1.UserController],
+        imports: [sequelize_1.SequelizeModule.forFeature([country_entity_1.default])],
+        providers: [country_service_1.CountryService],
+        exports: [country_service_1.CountryService],
+        controllers: [country_controller_1.CountryController],
     })
-], UserModule);
-//# sourceMappingURL=user.module.js.map
+], CountryModule);
+//# sourceMappingURL=country.module.js.map

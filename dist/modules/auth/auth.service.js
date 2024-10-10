@@ -28,15 +28,30 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        const payload = { email: user.email, sub: user.id };
+        const { email, password } = user;
+        const hasUser = await this.userService.findByEmail(email);
+        if (!hasUser) {
+            throw new common_1.NotFoundException('Usuário não encontrado');
+        }
+        const passwordMatches = await bcrypt.compare(password, user.password);
+        if (!passwordMatches) {
+            throw new common_1.UnauthorizedException('Credenciais inválidas');
+        }
+        const payload = {
+            email: user.email,
+            userId: user.id,
+            name: user.name,
+        };
         return {
-            access_token: this.jwtService.sign(payload),
+            message: 'Login realizado com sucesso!',
+            accessToken: this.jwtService.sign(payload),
+            user: hasUser,
         };
     }
     async register(registerDto) {
         const isInvited = await this.userService.isEmailInvited(registerDto.email);
         if (!isInvited) {
-            throw new common_1.BadRequestException('Este email não foi convidado.');
+            throw new common_1.UnauthorizedException('Você não tem permissão para se cadastrar, entre em contato com um administrador.');
         }
         const hashedPassword = await bcrypt.hash(registerDto.password, 10);
         return this.userService.createUser({

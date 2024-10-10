@@ -32,14 +32,14 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        field: 'created_at',
+        field: 'createdAt',
     }),
     sequelize_typescript_1.CreatedAt,
     __metadata("design:type", Date)
 ], User.prototype, "createdAt", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        field: 'updated_at',
+        field: 'updatedAt',
     }),
     sequelize_typescript_1.UpdatedAt,
     __metadata("design:type", Date)
